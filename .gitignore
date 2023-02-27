@@ -1,3 +1,6 @@
 *.MOV
 *.mp4
 AidLux智慧社区AI实战训练营
+datasets
+traintest
+runs

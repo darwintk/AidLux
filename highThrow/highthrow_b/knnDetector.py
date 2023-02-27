@@ -8,7 +8,7 @@ class knnDetector:
     def __init__(self, history, dist2Threshold, minArea):
         self.minArea = minArea 
         self.detector = cv2.createBackgroundSubtractorKNN(history, dist2Threshold, False) # 定义一个去背景的knn
-        self.kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+        self.kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)) # 定义一个结构元素
 
     def detectOneFrame(self, frame):
         if frame is None:

@@ -56,7 +56,7 @@ def start_detect():
             break
 
         frame_start = time.time()
-        frame = adjust.debouncing(frame)
+        frame = adjust.debouncing(frame) # 去抖动，将当前帧图像与初始帧进行匹配，旋转变换到和初始帧同样的位置
         print(f"debouncing image take {time.time() - frame_start} s")
 
         start = time.time()

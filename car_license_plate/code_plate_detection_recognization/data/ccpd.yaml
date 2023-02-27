@@ -1,0 +1,8 @@
+path:
+train: ../datasets/ccpd10000/train
+val: ../datasets/ccpd10000/val
+test: ../datasets/ccpd10000/val
+
+nc: 1
+names: ['licence']
+

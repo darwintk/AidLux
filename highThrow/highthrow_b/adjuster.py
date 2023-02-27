@@ -17,17 +17,17 @@ class Adjuster:
         (self.kps, self.features) = self.detectAndDescribe(self.start_image)
     '''去抖动算法'''
     def debouncing(self, image, ratio=0.7, reprojThresh=4.0, showMatches=False):
-        image = cv2.resize(image, (int(image.shape[1]/1), int(image.shape[0]/1)))
+        image = cv2.resize(image, (int(image.shape[1]/1), int(image.shape[0]/1))) # 这一步是为何
         start = time.time()
         (kps, features) = self.detectAndDescribe(image)
         print(f"take {time.time() - start} s")
-        M = self.matchKeypoints(kps, self.kps, features, self.features, ratio, reprojThresh)
+        M = self.matchKeypoints(kps, self.kps, features, self.features, ratio, reprojThresh) #这一帧和第一帧图像进行关键点匹配，会得到一个仿射变换矩阵
 
         if M is None:
             return None
 
         (matches, H, status) = M
-        result = cv2.warpPerspective(image, H, (image.shape[1] + image.shape[1], image.shape[0] + image.shape[0]))
+        result = cv2.warpPerspective(image, H, (image.shape[1] + image.shape[1], image.shape[0] + image.shape[0])) # 进行仿射变换
 
         result = result[int(self.edge[1]):int(image.shape[0] - self.edge[1]),
                  int(self.edge[0]):int(image.shape[1] - self.edge[0])]
