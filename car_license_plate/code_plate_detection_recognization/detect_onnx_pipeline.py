@@ -263,8 +263,9 @@ def detect_onnx(save_img=True, save_conf=True):
 
                 label = f'names{[str(cls)]} {conf:.2f}'
                 # plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
-                plot_one_box_class(xyxy_, image_ori, label=label, predstr=cls,
-                                    line_thickness=3)
+                imgout = plot_one_box_ch(xyxy_, image_ori, label=label, predstr=cls, line_thickness=3)
+                # plot_one_box_class(xyxy_, image_ori, label=label, predstr=cls,
+                #                     line_thickness=3)
 
             # Save results (image with detections)
             if save_img:

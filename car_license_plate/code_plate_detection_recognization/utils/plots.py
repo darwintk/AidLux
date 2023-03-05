@@ -101,6 +101,25 @@ def plot_one_box_class(x, img, label=None, predstr=None, color=None,  line_thick
             cv2.putText(img, predstr, (c1[0], c1[1] - 2), 0, tl / 3, [225, 255, 255], thickness=tf, lineType=cv2.LINE_AA)
 
 
+def plot_one_box_ch(x, img, color=None, label=None, predstr=None, line_thickness=None):
+    cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img_PIL = Image.fromarray(cv2img)
+    font = ImageFont.truetype('./simhei.ttf', 20)
+    # Plots one bounding box on image img
+    c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
+    if label:
+        if predstr:
+            draw = ImageDraw.Draw(img_PIL)
+            text_size = draw.textsize(predstr, font)
+            draw.text((c1[0], c1[1]-20), predstr, (255, 0, 0), font=font)
+            # draw.text((c1[0], c1[1]-16), label,  fill=(0, 0, 0), font=font)
+            draw.rectangle((c1, c2),outline=(255,0,0))
+            draw.rectangle((c1[0], c1[1], c1[0] + text_size[0], c1[1] - text_size[1] - 3),outline=(255,0,0))
+            imgout = cv2.cvtColor(np.array(img_PIL), cv2.COLOR_RGB2BGR)
+    return imgout
+            
+
+
 # 1、没用到
 def plot_one_box_PIL(box, im, color=(128, 128, 128), label=None, line_thickness=None):
     """

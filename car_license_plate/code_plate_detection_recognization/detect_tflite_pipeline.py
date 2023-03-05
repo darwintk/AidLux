@@ -300,6 +300,7 @@ def detect_tflite(save_img=True, save_conf=True):
                 # plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
                 plot_one_box_class(xyxy_, image_ori, label=label, predstr=cls,
                                     line_thickness=3)
+                
 
             # Save results (image with detections)
             if save_img:
@@ -311,14 +312,14 @@ def detect_tflite(save_img=True, save_conf=True):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--detect_weights', nargs='+', type=str,
-                        default=r"D:\code_plate_detection_recognization_1\weights\yolov5.tflite",
+                        default=r"F:\code\AidLux\car_license_plate\code_plate_detection_recognization\weights\yolov5.tflite",
                         help='detection model path(s)')
     parser.add_argument('--classifi_weights', nargs='+', type=str,
-                        default=r"D:\code_plate_detection_recognization_1\weights\LPRNet_Simplified.tflite",
+                        default=r"F:\code\AidLux\car_license_plate\code_plate_detection_recognization\weights\LPRNet_Simplified.tflite",
                         help='classification model path(s)')
-    parser.add_argument('--source', type=str, default=r"D:\code_plate_detection_recognization_1\demo\images",
+    parser.add_argument('--source', type=str, default=r"F:\code\AidLux\car_license_plate\code_plate_detection_recognization\demo\images",
                         help='source')  # file/folder, 0 for webcam
-    parser.add_argument('--save_dir', type=str, default=r'D:\code_plate_detection_recognization_1\demo\output',
+    parser.add_argument('--save_dir', type=str, default=r'F:\code\AidLux\car_license_plate\code_plate_detection_recognization\demo\output',
                         help='source')  # folder,
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf_thres', type=float, default=0.5, help='object confidence threshold')
