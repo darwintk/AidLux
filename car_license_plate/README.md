@@ -20,8 +20,6 @@
 
 
 
-
-
 ## YOLOv5车牌检测
 
 使用cpdd10000数据集，在本机训练了车牌识别模型，
@@ -50,7 +48,9 @@
 
 此处将images_rec分为训练集和验证集进行训练，也出现了训练精度一直为零的情况。
 
-因此后续的测试中还是使用了老师提供的模型。
+![lprnet_training_error](./src/lprnet_training_error.png)
+
+后续再次测试，精度在0.55左右波动。因此后续的测试中还是使用了老师提供的模型，之后再用全部数据集跑一次。
 
 
 
@@ -99,7 +99,11 @@ def plot_one_box_ch(x, img, color=None, label=None, predstr=None, line_thickness
 
 ![pic3](./src/pic5.png)
 
+### 另外的图像测试
 
+也测试了自己拍的公交车牌，车牌有黄色和绿色组成，也能正常识别，结果如下：
+
+![testpic](./src/20230306005841.jpg)
 
 
 
@@ -107,3 +111,6 @@ def plot_one_box_ch(x, img, color=None, label=None, predstr=None, line_thickness
 
 安卓端的设备为小米9，安卓版本10，系统为MIUI 12.0.6
 
+为了显示中文，依旧是按照上面的方法改动`aidlux/det_recog_aidlux_inference.py`，修改完成后，使用vscode远程访问aidlux，并运行代码，具体演示结果，见：
+
+https://www.bilibili.com/video/BV1Mo4y1k7qC/?vd_source=157ed8f85e007bba16b075c6780b104b
