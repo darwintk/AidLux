@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from PIL import Image, ImageDraw, ImageFont  # 图片操作模块
 
 CHARS = ['京', '沪', '津', '渝', '冀', '晋', '蒙', '辽', '吉', '黑',
          '苏', '浙', '皖', '闽', '赣', '鲁', '豫', '鄂', '湘', '粤',
@@ -236,6 +237,23 @@ def plot_one_box_class(x, img, label=None, predstr=None, color=None,  line_thick
 
 
     return cv2.cvtColor(np.asarray(img), cv2.COLOR_BGR2RGB)
+
+def plot_one_box_ch(x, img, label=None, predstr=None, color=None,  line_thickness=3):
+    cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img_PIL = Image.fromarray(cv2img)
+    font = ImageFont.truetype('./simhei.ttf', 20)
+    # Plots one bounding box on image img
+    c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
+    if label:
+        if predstr:
+            draw = ImageDraw.Draw(img_PIL)
+            text_size = draw.textsize(predstr, font)
+            draw.text((c1[0], c1[1]-20), predstr, (255, 0, 0), font=font)
+            # draw.text((c1[0], c1[1]-16), label,  fill=(0, 0, 0), font=font)
+            draw.rectangle((c1, c2),outline=(255,0,0),width=3)
+            draw.rectangle((c1[0], c1[1], c1[0] + text_size[0], c1[1] - text_size[1] - 3),outline=(255,0,0),width=3)
+            imgout = cv2.cvtColor(np.array(img_PIL), cv2.COLOR_RGB2BGR) #
+    return imgout
 
 def letterbox(img, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleFill=False, scaleup=True, stride=32):
     # Resize and pad image while meeting stride-multiple constraints

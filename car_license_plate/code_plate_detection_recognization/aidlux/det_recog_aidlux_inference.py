@@ -7,10 +7,10 @@ import cv2
 import os 
 
 anchor = [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]]
-source ="/home/code_plate_detection_recognization_1/demo/images"
-det_model_path = "/home/code_plate_detection_recognization_1/weights/yolov5.tflite"
-recog_model_path = "/home/code_plate_detection_recognization_1/weights/LPRNet_Simplified.tflite"
-save_dir = "/home/code_plate_detection_recognization_1/demo/output"
+source ="/home/AidLux/car_license_plate/code_plate_detection_recognization/demo/images"
+det_model_path = "/home/AidLux/car_license_plate/code_plate_detection_recognization/weights/yolov5.tflite"
+recog_model_path = "/home/AidLux/car_license_plate/code_plate_detection_recognization/weights/LPRNet_Simplified.tflite"
+save_dir = "/home/AidLux/car_license_plate/code_plate_detection_recognization/demo/output"
 imgsz =640
 # AidLite初始化：调用AidLite进行AI模型的加载与推理，需导入aidlite
 aidlite = aidlite_gpu.aidlite()
@@ -98,10 +98,12 @@ for img_name in os.listdir(source):
             label = f'names{[str(cls)]} {conf:.2f}'
             print(label)
             # plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
-            plot_one_box_class(xyxy_, image_ori, label=label, predstr=cls,
+            # plot_one_box_class(xyxy_, image_ori, label=label, predstr=cls,
+            #                     line_thickness=3)
+            imgout = plot_one_box_ch(xyxy_, image_ori, label=label, predstr=cls,
                                 line_thickness=3)
 
         # Save results (image with detections)
             img_path = os.path.join(save_dir, img_name)
             # cv2.imwrite(img_path, image_ori)
-            cvs.imshow(image_ori)
+            cvs.imshow(imgout)

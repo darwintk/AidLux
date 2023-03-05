@@ -7,12 +7,12 @@ import cv2
 import os 
 
 anchor = [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]]
-source ="/home/code_plate_detection_recognization_1/demo/images"
+source ="/home/AidLux/car_license_plate/code_plate_detection_recognization/demo/images"
 imgsz =640
 # AidLite初始化：调用AidLite进行AI模型的加载与推理，需导入aidlite
 aidlite = aidlite_gpu.aidlite()
 # Aidlite模型路径
-model_path = "/home/code_plate_detection_recognization_1/weights/yolov5.tflite"
+model_path = "/home/AidLux/car_license_plate/code_plate_detection_recognization/weights/yolov5.tflite"
 # 定义输入输出shape
 in_shape = [1 * 3* 640 * 640 * 4]
 out_shape = [1 * 3*40*40 * 6 * 4,1 * 3*20*20 * 6 * 4,1 * 3*80*80 * 6 * 4]
@@ -54,10 +54,10 @@ for img_name in os.listdir(source):
     
     pred = np.hstack((boxes, confs,classes)).astype(np.float32, copy=False)
     print("pred",pred)
-    # pred = detect_postprocess(pred, frame.shape, [640, 640, 3], conf_thres=0.5, iou_thres=0.45)
+    pred = detect_postprocess(pred, frame.shape, [640, 640, 3], conf_thres=0.5, iou_thres=0.45)
     # 绘制推理结果
-    # res_img = draw_detect_res(image_ori, pred)
-    # cvs.imshow(res_img)
+    res_img = draw_detect_res(image_ori, pred)
+    cvs.imshow(res_img)
 
 
 # cap.release()
